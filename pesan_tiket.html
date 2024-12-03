@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="Js/jquery-3.7.1.min.js"></script>
+    <title>Pemesanan Tiket</title>
+  </head>
+  <body>
+    <form id="form-pesanan">
+      <h2>Lengkapi Data</h2>
+      <div class="form-group">
+        <label for="nama">Nama</label>
+        <input type="text" name="nama" id="nama" />
+      </div>
+      <div class="form-group">
+        <label for="jenis_kelamin">Jenis Kelamin</label>
+        <input
+          type="radio"
+          name="jenis_kelamin"
+          id="laki_laki"
+          value="Laki-laki"
+        />Laki- laki
+        <input
+          type="radio"
+          name="jenis_kelamin"
+          id="perempuan"
+          value="perempuan"
+        />
+        Perempuan
+      </div>
+      <div class="form-group">
+        <label for="no_telepon">Nomor Telepon</label>
+        <input type="number" name="no_telepon" id="no_telepon" />
+      </div>
+      <div class="form-group">
+        <label for="tgl-reservasi">Tanggal Reservasi</label>
+        <input type="date" name="tgl" id="tgl">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" />
+      </div>
+      <div class="form-group">
+        <label for="kategori_jenis">Kategori - Jenis</label>
+        <select name="kategori_jenis" id="kategori_jenis">
+          <option value="kosong">Pilih Opsi</option>
+          <option value="domestik_dewasa">Domestik - Dewasa</option>
+          <option value="domestik_anak">Domestik - Anak</option>
+          <option value="mancanegara_dewasa">Mancanegara - Dewasa</option>
+          <option value="mancanegara_anak">Mancanegara - Anak</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="harga">Harga</label>
+        <input type="text" name="harga" id="harga" readonly />
+      </div>
+      <div class="form-group">
+        <label for="qty">Jumlah Tiket</label>
+        <input type="number" name="qty" id="qty" />
+      </div>
+      <div class="form-group">
+        <label for="total_harga">Total Harga</label>
+        <input type="text" name="total_harga" id="total_harga" readonly />
+      </div>
+      <center><a id="submit-btn">Pesan Sekarang</a>
+      <a id="cancel-btn">Batal</a>
+    </form>
+
+    <div style="display: none;" id="pesanTerimakasih">
+      <h1>Terimakasih <p id="nama-pesan"></p> Sudah Memesan Tiket..</h1>
+    </div>
+    <script>
+      // domestik_dewasa
+      //domestik_anak
+      //mancanegara_dewasa
+      //mancanegara_anak
+      $("#submit-btn").click(function(){
+        var nama = $('#nama').val();
+        $('#form-pesanan').fadeOut(5000);
+        $('#nama_pesan').text(nama);
+        $('#pesanTerimakasih').fadeIn(1000);
+});
+
+$("#kategori_jenis").change(function(){
+  var kategori_jenis= $('#kategori_jenis').val();
+  if (kategori_jenis=='domestik_dewasa') {
+  $('#harga').val('150.000')
+}else if (kategori_jenis=='domestik_anak') {
+  $('#harga').val('75.000')
+}else if (kategori_jenis=='mancanegara_dewasa') {
+  $('#harga').val('300.000')
+}else if (kategori_jenis=='mancanegara_anak') {
+  $('#harga').val('150.000')
+}else if (kategori_jenis=='kosong') {
+  $('#harga').val(' ')
+}else{
+  $('#harga').val('500.000')
+}
+alert("Jenis Tiket Dipilih adalah"+' '+kategori_jenis);
+});
+
+$("#qty").keyup(function(){
+  var harga = $('#harga').val();
+  var qty = $('#qty').val()
+  var total_harga = harga.replace('.','')*qty;
+  var total_harga_format = total_harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  $('#total_harga').val(total_harga_format);
+});
+    </script>
+  </body>
+</html>

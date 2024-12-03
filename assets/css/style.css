@@ -1,0 +1,12 @@
+#img2 {
+  border-radius: 20px;
+}
+.tabelharga {
+  width: 100%;
+}
+.tabelharga,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
